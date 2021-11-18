@@ -12,3 +12,9 @@ def compute_log_likelihood(p_A, p_V, p_AV, data, n_samples):
     L = np.log(binomial_pmf(data, n_samples, probs)).sum()
     return -L
 
+
+def to_table_body(matrix):
+    return "\\\\\n".join([
+        f"Subject {i+1} & " + " & ".join(np.char.mod('%.2f', x)) 
+        for i, x in enumerate(matrix)
+    ])
