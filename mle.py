@@ -18,13 +18,12 @@ def compute_params(mu_At, mu_Vt, std_A, std_V):
     mu_At = mu_At.reshape(1, -1)
     mu_Vt = mu_Vt.reshape(-1, 1)
 
-    # use equations from 
+    # use equations from the paper to calculate mean and variance
     r_A, r_V = 1 / var_A, 1 / var_V
     w_A = r_A / (r_A + r_V)
     w_V = r_V / (r_A + r_V)
-
     mu_AV = w_A * mu_At + w_V * mu_Vt
-    std_AV = np.sqrt(w_A**2 * var_A + w_V**2 * var_V)
+    std_AV = 1 / np.sqrt(r_A + r_V)
 
     # return mean and standard deviation
     return mu_AV, std_AV
