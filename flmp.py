@@ -26,7 +26,7 @@ def compute_probs(theta_A, theta_V):
     return p_A, p_V, p_AV
 
 
-def objective_function(theta, data, K, n_samples=24):
+def objective_function(theta, data, K, n_samples=24, leave_out_idx=None):
     # extract audio and visual parameters
     theta_A = theta[0:K]
     theta_V = theta[K: ]
@@ -35,12 +35,12 @@ def objective_function(theta, data, K, n_samples=24):
     p_A, p_V, p_AV = compute_probs(theta_A, theta_V)
     
     # compute and return the negative log-likelihood    
-    return compute_log_likelihood(p_A, p_V, p_AV, data, n_samples)
+    return compute_log_likelihood(p_A, p_V, p_AV, data, n_samples, leave_out_idx=leave_out_idx)
 
 
-def fit(theta, data, n_samples, K):
+def fit(theta, data, n_samples, K, leave_out_idx=None):
     """Perform FLMP fit to data"""
-    opt_result = minimize(objective_function, theta, args=(data, K, n_samples))
+    opt_result = minimize(objective_function, theta, args=(data, K, n_samples, leave_out_idx))
     objective, theta_A, theta_V = (
         opt_result.fun, 
         (opt_result.x[0:K]), 

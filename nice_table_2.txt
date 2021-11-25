@@ -1,0 +1,11 @@
+\begin{tabular}{lrr}
+\toprule
+{} &    FLMP &    MLE \\
+\midrule
+Subject 1 &   66.69 &  89.30 \\
+Subject 2 &  338.14 &  73.01 \\
+Subject 3 &   87.86 &  80.73 \\
+Subject 4 &   57.39 &  79.65 \\
+Subject 5 &   70.47 &  64.84 \\
+\bottomrule
+\end{tabular}
