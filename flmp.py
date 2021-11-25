@@ -20,7 +20,6 @@ def compute_probs(theta_A, theta_V):
 
     # compute audiovisual probabilities by
     # taking the outer product for all combinations of audio and visual
-    # p_AV = (p_A @ p_V.T) / (p_A @ p_V.T + (1 - p_A) @ (1 - p_V).T)
     p_AV = (p_V @ p_A.T) / (p_V @ p_A.T + (1 - p_V) @ (1 - p_A).T)
 
     return p_A, p_V, p_AV
