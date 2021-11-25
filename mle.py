@@ -44,7 +44,7 @@ def compute_probs(c_A, c_V, std_A, std_V):
     return p_A, p_V, p_AV
 
 
-def objective_function(theta, data, n_samples):
+def objective_function(theta, data, n_samples, leave_out_idx=None):
     """ Compute MLE objective function on data (7, 5) from a single subject
         where theta=[c_A, c_V, log(std_A), log(std_V)]."""
 
@@ -56,14 +56,14 @@ def objective_function(theta, data, n_samples):
     p_A, p_V, p_AV = compute_probs(c_A, c_V, std_A, std_V)
 
     # compute and return the negative log-likelihood
-    return compute_log_likelihood(p_A, p_V, p_AV, data, n_samples)
+    return compute_log_likelihood(p_A, p_V, p_AV, data, n_samples, leave_out_idx=leave_out_idx)
 
 
-def fit(theta, data, n_samples):
+def fit(theta, data, n_samples, leave_out_idx=None):
     """Perform MLE fit to data for a single subject"""
 
     # optimize
-    opt_result = minimize(objective_function, theta, args=(data, n_samples))
+    opt_result = minimize(objective_function, theta, args=(data, n_samples, leave_out_idx))
 
     # extract results
     objective = opt_result.fun
